@@ -3,7 +3,7 @@ import './App.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import imageSource from './a.png';
-import Toggle from './Toggle';
+import ToggleBtn from './ToggleBtn.tsx';
 
 function App() {
 
@@ -92,7 +92,7 @@ function App() {
 
   return (
     <div>
-      <Toggle/>
+      <ToggleBtn/>
       {/* <canvas id='canvas'></canvas> */}
     </div>
   );
