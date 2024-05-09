@@ -55,7 +55,10 @@ function App() {
       new THREE.BoxGeometry(2,2,2), // geometry
       // new THREE.MeshBasicMaterial({color: 'firebrick'}) // material
       // new THREE.MeshLambertMaterial({color: 'firebrick'})
-      new THREE.MeshLambertMaterial({map: texture})
+      new THREE.MeshLambertMaterial({
+        map: texture,
+        side: THREE.DoubleSide
+      })
     );
     boxMesh.position.y = 1;
     boxMesh.castShadow = true; // 조명 2에 의한 그림자가 생기도록 castShadow 추가
@@ -77,8 +80,11 @@ function App() {
 
     // Draw 
     let boxMeshY = 1;
+
+    const clock = new THREE.Clock();
     function draw() {
-      // boxMeshY += 0.01;
+      const delta = clock.getDelta();
+      boxMeshY += delta*3;
       boxMesh.position.y = boxMeshY;
       renderer.render(scene, camera)
       controls.update();
@@ -86,6 +92,15 @@ function App() {
       renderer.setAnimationLoop(draw); // 필수화면
     }
     draw();
+
+
+      
+    function setLayout() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    window.addEventListener('resize', setLayout);
   }, [])
   
 
